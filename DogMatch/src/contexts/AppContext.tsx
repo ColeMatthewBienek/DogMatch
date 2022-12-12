@@ -48,7 +48,7 @@ interface IAnimals {
   name: string;
   description: string;
   organization_animal_id: number | null;
-  photos: IPhotos[];
+  photos: IPhotos[] | [];
   primary_photo_cropped: IPhotos[];
   status: string;
   contact: {
@@ -57,6 +57,8 @@ interface IAnimals {
 }
 
 interface IAppContextInterface {
+  animalData: IAnimals[];
+  typeData: ITypes[];
   state: object;
   setState: React.Dispatch<React.SetStateAction<{}>>;
   getAnimalData: Function;
@@ -83,11 +85,8 @@ export function ApplicationContext({ children }: Props): JSX.Element {
         const { animals } = animalsGet.data;
         const { types } = typesGet.data;
 
-        console.log("animals: ", animals);
-        console.log("types: ", types);
-
         // type and add "animals" data that i will use
-        const animalData: IAnimals = animals.map((animal: any) => {
+        const animalData: IAnimals[] = animals.map((animal: any) => {
           return {
             id: animal.id,
             organization_id: animal.organization_id,
@@ -132,12 +131,15 @@ export function ApplicationContext({ children }: Props): JSX.Element {
             genders: type.genders,
           };
         });
-
+        console.log("animalData: ", animalData);
+        console.log("typeData: ", typeData);
+        console.log("photos ", animalData[0].photos[0]);
         const tempState = {
           animalData,
           typeData,
         };
         setState(tempState);
+        setLoading(false);
       } catch (err) {
         console.log(err);
       }
