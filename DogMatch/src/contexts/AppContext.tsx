@@ -86,41 +86,45 @@ export function ApplicationContext({ children }: Props): JSX.Element {
         const { types } = typesGet.data;
 
         // type and add "animals" data that i will use
-        const animalData: IAnimals[] = animals.map((animal: any) => {
-          return {
-            id: animal.id,
-            organization_id: animal.organization_id,
-            url: animal.url,
-            type: animal.type,
-            species: animal.species,
-            breeds: {
-              primary: animal.breeds.primary,
-              secondary: animal.breeds.secondary,
-              mixed: animal.breeds.mixed,
-              unknown: animal.breeds.unkown,
-            },
-            age: animal.age,
-            gender: animal.gender,
-            size: animal.size,
-            attributes: {
-              spayed_neutered: animal.attributes.spayed_neutered,
-              house_trained: animal.attributes.house_trained,
-              declawed: animal.attributes.declawed,
-              special_needs: animal.attributes.special_needs,
-              shots_current: animal.attributes.shots_current,
-            },
-            tags: animal.tags,
-            name: animal.name,
-            description: animal.description,
-            organization_animal_id: animal.organization_animal_id,
-            photos: animal.photos,
-            primary_photo_cropped: animal.primary_photo_cropped,
-            status: animal.status,
-            contact: {
-              email: animal.contact.email,
-            },
-          };
-        });
+        const animalData: IAnimals[] = animals
+          .map((animal: any) => {
+            return {
+              id: animal.id,
+              organization_id: animal.organization_id,
+              url: animal.url,
+              type: animal.type,
+              species: animal.species,
+              breeds: {
+                primary: animal.breeds.primary,
+                secondary: animal.breeds.secondary,
+                mixed: animal.breeds.mixed,
+                unknown: animal.breeds.unkown,
+              },
+              age: animal.age,
+              gender: animal.gender,
+              size: animal.size,
+              attributes: {
+                spayed_neutered: animal.attributes.spayed_neutered,
+                house_trained: animal.attributes.house_trained,
+                declawed: animal.attributes.declawed,
+                special_needs: animal.attributes.special_needs,
+                shots_current: animal.attributes.shots_current,
+              },
+              tags: animal.tags,
+              name: animal.name,
+              description: animal.description,
+              organization_animal_id: animal.organization_animal_id,
+              photos: animal.photos,
+              primary_photo_cropped: animal.primary_photo_cropped,
+              status: animal.status,
+              contact: {
+                email: animal.contact.email,
+              },
+            };
+          })
+          .filter((element: any) => {
+            return element.photos[0] !== undefined;
+          });
 
         // type and add "types" data that I will use
         const typeData: ITypes = types.map((type: any) => {
