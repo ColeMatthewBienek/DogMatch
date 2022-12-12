@@ -49,10 +49,11 @@ const PetList: React.FC<IProps> = (props: IProps) => {
                 key={index}
                 photo={
                   animal.photos[0] !== undefined
-                    ? animal.photos[0].large
+                    ? animal.photos[0].full
                     : sadNoPhoto
                 }
                 description={animal.description}
+                species={animal.species}
               />
             );
           })
